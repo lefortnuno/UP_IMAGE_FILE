@@ -4,7 +4,7 @@ const path = require("path");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-    destination: path.join(__dirname, '../public_html/', 'uploads'),
+    destination: path.join(__dirname, '../../front/public/', 'picture/fiche-mere'),
     filename: function (req, file, cb) {   
         // null as first argument means no error
         cb(null, Date.now() + '-' + file.originalname )  

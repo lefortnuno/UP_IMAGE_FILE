@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import arrayPic from "../img/logol.jpg";
+import Webimage from "./Webimage";
 
 export default function Utilisateur() {
-    const [users, setUsers] = useState([]);
-  
-    useEffect(() => {
-      getUsers();
-    }, []);
-  
-    function getUsers() {
-      axios.get(`http://192.168.8.102:5015/api/utilisateur/`).then(function (response) {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  function getUsers() {
+    axios
+      .get(`http://192.168.8.102:5015/api/utilisateur/`)
+      .then(function (response) {
         setUsers(response.data);
         console.log(response.data);
       });
-    }
+  }
 
   const [userInfo, setuserInfo] = useState({
     file: [],
@@ -43,7 +47,7 @@ export default function Utilisateur() {
         console.warn(res);
         if (res.data.success) {
           setSuccess("Image upload successfully");
-          getUsers()
+          getUsers();
         }
       });
   };
@@ -89,6 +93,18 @@ export default function Utilisateur() {
         />
       ) : null}
 
+      {/* IIIIIIIIIIIIIIIIIIIIIIIII */}
+      {/* <img
+        src={process.env.PUBLIC_URL + "/img/logol.jpg"}
+        style={{ width: "100px", height: "50px" }}
+      /> */}
+
+      {/* IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII */}
+      {/* <img src={arrayPic} style={{ width: "150px", height: "75px" }} /> */}
+
+      {/* IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII */}
+      {/* <Webimage /> */}
+
       <div className="container">
         <table>
           <thead>
@@ -97,21 +113,26 @@ export default function Utilisateur() {
               <th>image</th>
             </tr>
           </thead>
-            <tbody>
-              {contenuTab ? (
-                users.map((user, key) => (
-                  <tr key={key}>
-                    <th scope="row">{user.id} </th>
-                    <td> <img src={`/public_html/uploads/${user.image}`} style={{ width: '100px', height: '50px'}} /> </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td>La liste</td>
-                  <td>  est vide .... </td>
+          <tbody>
+            {contenuTab ? (
+              users.map((user, key) => (
+                <tr key={key}>
+                  <th scope="row">{user.id} </th>
+                  <td>
+                    <img
+                      src={process.env.PUBLIC_URL+`picture/fiche-mere/${user.image}`}
+                      style={{ width: "250px", height: "250px" }}
+                    />
+                  </td>
                 </tr>
-              )}
-            </tbody>
+              ))
+            ) : (
+              <tr>
+                <td>La liste</td>
+                <td> est vide .... </td>
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
     </div>
